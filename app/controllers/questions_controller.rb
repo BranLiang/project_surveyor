@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   def new
-    @survey = Survey.includes(:questions).find(params[:survey_id])
+    @survey = Survey.includes(:questions => :response_options).find(params[:survey_id])
     @question = Question.new
   end
 
@@ -27,6 +27,20 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def destroy
+    store_referer
+    question = Question.find_by_id(params[:id])
+    if question && question.destroy
+      flash[:success] = ["question ID: #{question.id} has been deleted"]
+      redirect_to referer
+    else
+      flash[:danger] = question.errors.full_messages
+      redirect_to referer
+    end
+
+
+  end
+
   private
     def white_list_params
       params.require(:question).permit(:survey_id,
@@ -39,6 +53,14 @@ class QuestionsController < ApplicationController
                                            :text
                                          ]
                                          })
+    end
+
+    def store_referer
+      session[:referer] = request.referer
+    end
+
+    def referer
+      session.delete(:referer)
     end
 
 

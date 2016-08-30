@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'surveys#index'
 
   resources :surveys,   only: [:index, :new, :create]
-  resources :questions, only: [:index, :new, :create, :edit, :update]
+  resources :questions
   resources :choices,   only: [:index]
   resources :response_options, only: [:new, :create]
   get 'choose', to: 'choices#choose'

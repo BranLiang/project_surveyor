@@ -8,9 +8,10 @@ class Survey < ApplicationRecord
 
 
   def has_no_questions_with_text?
-    if self.questions.empty?
+    all_questions = self.questions
+    if all_questions.empty?
       return true
-    elsif self.questions.all?(&:has_no_text?)
+    elsif all_questions.all?(&:has_no_text?)
       return true
     else
       return false
