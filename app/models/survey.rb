@@ -36,6 +36,10 @@ class Survey < ApplicationRecord
     has_no_num_ranges?
   end
 
+  def has_questions?
+    !has_no_questions?
+  end
+
   def all_multi_questions_with_text
     self.questions.where.not(text: nil)
   end

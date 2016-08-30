@@ -32,4 +32,10 @@
       <h4>There are no questions yet. Mother fucker.</h4>
     <% end %>
   </ol>
+  <% if survey.has_questions? %>
+    <hr>
+    <div class="form-group">
+      <%= link_to "Finish Building Survey and Return", root_path, class: "btn btn-primary btn-lg btn-block" %>
+    </div>
+  <% end %>
 </div>
