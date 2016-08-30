@@ -27,6 +27,7 @@
       <%= f.submit "Add Question", class: "btn btn-primary btn-lg btn-block" %>
     </div>
   <% end %>
+  <h4><%= link_to "Back to previews step", edit_question_path(@question) %></h4>
 
   <%= render 'shared/exist_questions', survey: @survey %>
 

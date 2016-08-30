@@ -9,8 +9,7 @@ class Question < ApplicationRecord
   validates :text, length: { within: 1..200 },
                    allow_nil: true
 
-  validates :options, length: { within: 1..10 },
-                      allow_nil: true
+  validates :options, length: { within: 1..10 }
 
   def self.question_types
     [
@@ -19,12 +18,16 @@ class Question < ApplicationRecord
     ]
   end
 
+  def has_no_options?
+    self.response_options.empty?
+  end
+
   def has_text?
-    self.text ? true : false
+    self.text
   end
 
   def has_no_text?
-    self.text ? false : true
+    !has_text?
   end
 
   def require_status

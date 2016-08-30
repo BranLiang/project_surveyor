@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   resources :questions
   resources :num_ranges
   resources :choices,   only: [:index]
-  resources :response_options, only: [:new, :create]
+  resources :response_options, only: [:new, :create, :edit, :update]
   get 'choose', to: 'choices#choose'
 end

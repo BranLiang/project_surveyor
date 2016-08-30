@@ -1,11 +1,13 @@
 class QuestionsController < ApplicationController
+  include QuestionsHelper
+
   def new
-    @survey = Survey.includes(:questions => :response_options).find(params[:survey_id])
+    @survey = survey_includes.find_by_id(params[:survey_id])
     @question = Question.new
   end
 
   def create
-    @survey = Survey.find_by_id(params[:question][:survey_id])
+    @survey = survey_includes.find_by_id(params[:question][:survey_id])
     @question = Question.new(white_list_params)
     if @survey && @question.save
       flash[:success] = ["Multi select Question ID: #{@question.id} is created"]
@@ -16,11 +18,16 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def edit
+    @question = Question.find_by_id(params[:id])
+    @survey = survey_includes.find_by_id(@question.survey_id)
+  end
+
   def update
     @question = Question.find_by_id(params[:id])
     if @question && @question.update(white_list_params)
-      flash[:success] = ["Options for question ID: #{@question.id} has been created"]
-      redirect_to choices_path(:survey_id => @question.survey_id)
+      flash[:success] = ["Options for question ID: #{@question.id} has been updated."]
+      redirect_path_for_update @question
     else
       flash[:danger] = @question.errors.full_messages
       redirect_to new_response_option_path(:question_id => @question.id)
@@ -53,13 +60,7 @@ class QuestionsController < ApplicationController
                                          })
     end
 
-    def store_referer
-      session[:referer] = request.referer
-    end
 
-    def referer
-      session.delete(:referer)
-    end
 
 
 end
