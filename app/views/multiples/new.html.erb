@@ -1,0 +1,29 @@
+<div class="new-question">
+  <%= render 'shared/question_header', survey: @survey %>
+
+  <h3><strong>Add a Multiple Choice Question:</strong></h3>
+  <h4><span class="text-muted">1. Select options</span> | <strong>2. Add Question Text</strong></h4>
+
+  <hr>
+
+  <h4>
+    Next, add the text for each of your options.
+  </h4>
+  <%= form_for [:survey, @question] do |f| %>
+    <div class="form-group">
+      <h4><strong>What is your question?</strong></h4>
+      <%= f.text_field :text, class: "form-control input-lg" %>
+    </div>
+    <% @response_num.to_i.times do |i| %>
+      <div class="form-group">
+        <h4><strong>Option: <%= i+1 %></strong></h4>
+        <%= f.fields_for :response_options do |r| %>
+          <%= r.text_field :text, class: "form-control" %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= f.submit "Confirm", class: "btn btn-primary btn-lg btn-block" %>
+    </div>
+  <% end %>
+</div>
