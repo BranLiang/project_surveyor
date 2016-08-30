@@ -1,6 +1,6 @@
 class ChoicesController < ApplicationController
   def index
-    @survey = Survey.includes(:questions => :response_options).find(params[:survey_id])
+    @survey = Survey.find(params[:survey_id])
   end
 
   def choose

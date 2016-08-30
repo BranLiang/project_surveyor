@@ -38,7 +38,6 @@ class QuestionsController < ApplicationController
       redirect_to referer
     end
 
-
   end
 
   private
