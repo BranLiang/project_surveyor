@@ -1,6 +1,6 @@
 class Survey < ApplicationRecord
-  has_many :questions
-  has_many :num_ranges
+  has_many :questions, dependent: :destroy
+  has_many :num_ranges, dependent: :destroy
 
   validates :title, length: { within: 1..100 },
                     presence: true
