@@ -1,6 +1,6 @@
 class ChoicesController < ApplicationController
   def index
-    @survey = Survey.find(params[:survey_id])
+    @survey = Survey.includes(:questions).find(params[:survey_id])
   end
 
   def choose
@@ -10,8 +10,7 @@ class ChoicesController < ApplicationController
     when "multi"
       redirect_to new_question_path(:survey_id => survey_id)
     when "num_range"
-      flash[:danger] = ["Not functioning now!"]
-      redirect_to root_path
+      redirect_to new_num_range_path(:survey_id => survey_id)
     else
       flash[:dander] = ["Invalid question type!"]
       redirect_to root_path

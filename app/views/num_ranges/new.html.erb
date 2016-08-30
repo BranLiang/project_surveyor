@@ -1,0 +1,37 @@
+<div class="new_num_range">
+  <%= render 'shared/question_header', survey: @survey %>
+
+  <h3><strong>Add a Number Range Question:</strong></h3>
+
+  <hr>
+
+  <%= form_for @num_range do |f| %>
+    <%= f.hidden_field :survey_id, value: @survey.id %>
+    <div class="form-group">
+      <h4><strong>What is your question?</strong></h4>
+      <%= f.text_field :text, class: "form-control input-lg" %>
+    </div>
+    <div class="form-group">
+      <h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i> What is the Minimum Range Value?</h4>
+      <%= f.number_field :minimum, class: "form-control input-lg" %>
+    </div>
+    <div class="form-group">
+      <h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i> What is the Maximum Range Value?</h4>
+      <%= f.number_field :maximum, class: "form-control input-lg" %>
+    </div>
+    <div class="form-group">
+      <h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Is the question required?</h4>
+      <label>
+        <%= f.radio_button :required, true %>
+        Yes
+      </label>
+      <label>
+        <%= f.radio_button :required, false %>
+        No
+      </label>
+    </div>
+    <div class="form-group">
+      <%= f.submit "Add Number Range Question", class: "btn btn-primary btn-lg btn-block" %>
+    </div>
+  <% end %>
+</div>

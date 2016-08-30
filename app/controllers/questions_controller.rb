@@ -8,7 +8,7 @@ class QuestionsController < ApplicationController
     @survey = Survey.find_by_id(params[:question][:survey_id])
     @question = Question.new(white_list_params)
     if @survey && @question.save
-      flash[:success] = ["Question ID: #{@question.id} is created"]
+      flash[:success] = ["Multi select Question ID: #{@question.id} is created"]
       redirect_to new_response_option_path(:question_id => @question.id)
     else
       flash.now[:danger] = @question.errors.full_messages
