@@ -8,7 +8,8 @@
     </dl>
 
     <!-- redirect to different view depend's on user's choice -->
-    <%= form_tag choose_path(:type => :question_type, :survey_id => @survey.id), method: "get" do |f| %>
+    <%= form_tag choose_path, method: "get" do %>
+      <%= text_field_tag :survey_id, @survey.id, hidden: true %>
       <div class="form-group">
         <%= select_tag :question_type, options_for_select(Question.question_types), class: "form-control input-lg"  %>
       </div>
