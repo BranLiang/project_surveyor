@@ -4,6 +4,42 @@ class QuestionsController < ApplicationController
     @question = Question.new
   end
 
+  def create
+    @survey = Survey.find_by_id(params[:question][:survey_id])
+    @question = Question.new(white_list_params)
+    if @survey && @question.save
+      flash[:success] = ["Question ID: #{@question.id} is created"]
+      redirect_to new_response_option_path(:question_id => @question.id)
+    else
+      flash.now[:danger] = @question.errors.full_messages
+      render :new
+    end
+  end
+
+  def update
+    @question = Question.find_by_id(params[:id])
+    if @question && @question.update(white_list_params)
+      flash[:success] = ["Options for question ID: #{@question.id} has been created"]
+      redirect_to choices_path(:survey_id => @question.survey_id)
+    else
+      flash[:danger] = @question.errors.full_messages
+      redirect_to new_response_option_path(:question_id => @question.id)
+    end
+  end
+
+  private
+    def white_list_params
+      params.require(:question).permit(:survey_id,
+                                       :text,
+                                       :options,
+                                       :multi_select,
+                                       :required,
+                                       {
+                                         :response_options_attributes => [
+                                           :text
+                                         ]
+                                         })
+    end
 
 
 end

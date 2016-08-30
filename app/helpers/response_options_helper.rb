@@ -1,0 +1,2 @@
+module ResponseOptionsHelper
+end

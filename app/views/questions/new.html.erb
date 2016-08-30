@@ -1,3 +1,41 @@
 <div class="new-question">
   <%= render 'shared/question_header', survey: @survey %>
+
+  <div class="text-center">
+    <h2><strong>Add a Multiple Choice Question:</strong></h2>
+    <h3><strong>1.Select Options</strong> | <span class="text-muted">2.Add Question Text</span></h3>
+  </div>
+
+  <%= form_for @question do |f| %>
+    <%= f.hidden_field :survey_id, value: @survey.id %>
+    <div class="form-group">
+      <h4>How many options should the question have?</h4>
+      <%= f.select :options, (1..6).map {|i| [i, i]}, {}, class: "form-control input-lg" %>
+    </div>
+    <div class="form-group">
+      <h4>How many options can be selected?</h4>
+      <label>
+        <%= f.radio_button :multi_select, false %>
+        Just One
+      </label>
+      <label>
+        <%= f.radio_button :multi_select, true %>
+        Multiple
+      </label>
+    </div>
+    <div class="form-group">
+      <h4>Is the question required?</h4>
+      <label>
+        <%= f.radio_button :required, true %>
+        Yes
+      </label>
+      <label>
+        <%= f.radio_button :required, false %>
+        No
+      </label>
+    </div>
+    <div class="form-group">
+      <%= f.submit "Continue to the Next Stop", class: "btn btn-primary btn-lg btn-block" %>
+    </div>
+  <% end %>
 </div>
