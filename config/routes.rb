@@ -4,4 +4,6 @@ Rails.application.routes.draw do
 
   resources :surveys,   only: [:index, :new, :create]
   resources :questions, only: [:index, :new, :create]
+  resources :choices,   only: [:index]
+  get 'choose', to: 'choices#choose'
 end

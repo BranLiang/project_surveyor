@@ -11,7 +11,7 @@ class SurveysController < ApplicationController
     @survey = Survey.new(whilt_list_params)
     if @survey.save
       flash[:success] = ["Survey: \"#{@survey.title}\" has been successfully saved"]
-      redirect_to new_survey_question_path(@survey)
+      redirect_to choices_path(:survey_id => @survey.id)
     else
       flash[:danger] = @survey.errors.full_messages
       render :new

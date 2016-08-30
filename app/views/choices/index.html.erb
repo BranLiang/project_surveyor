@@ -1,0 +1,22 @@
+<div class="choice">
+
+  <%= render 'shared/question_header', survey: @survey %>
+
+    <dl>
+      <dt><h2><strong>Add a Question:</strong></h2></dt>
+      <dd><p><small>Choose which type of question to add.</small></p></dd>
+    </dl>
+
+    <!-- redirect to different view depend's on user's choice -->
+    <%= form_tag choose_path(:type => :question_type, :survey_id => @survey.id), method: "get" do |f| %>
+      <div class="form-group">
+        <%= select_tag :question_type, options_for_select(Question.question_types), class: "form-control input-lg"  %>
+      </div>
+      <div class="form-group">
+        <%= submit_tag "Add a New Question", class: "btn btn-primary btn-lg btn-block" %>
+      </div>
+    <% end %>
+
+
+
+</div>

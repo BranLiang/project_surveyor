@@ -14,7 +14,8 @@ class Question < ApplicationRecord
 
   def self.question_types
     [
-      ["Multiple Choice", "multi"]
+      ["Multiple Choice", "multi"],
+      ["Number Range(Not functioning yet)", "num_range"]
     ]
   end
 end
