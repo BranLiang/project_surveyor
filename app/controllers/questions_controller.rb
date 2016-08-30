@@ -31,13 +31,12 @@ class QuestionsController < ApplicationController
     store_referer
     question = Question.find_by_id(params[:id])
     if question && question.destroy
-      flash[:success] = ["question ID: #{question.id} has been deleted"]
+      flash[:success] = ["Multiple selection question ID: #{question.id} has been deleted"]
       redirect_to referer
     else
       flash[:danger] = question.errors.full_messages
       redirect_to referer
     end
-
   end
 
   private

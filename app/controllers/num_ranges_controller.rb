@@ -16,6 +16,18 @@ class NumRangesController < ApplicationController
     end
   end
 
+  def destroy
+    store_referer
+    question = NumRange.find_by_id(params[:id])
+    if question && question.destroy
+      flash[:success] = ["Number range question ID: #{question.id} has been deleted"]
+      redirect_to referer
+    else
+      flash[:danger] = question.errors.full_messages
+      redirect_to referer
+    end
+  end
+
   private
     def white_list_params
       params.require(:num_range).permit(:survey_id,
@@ -23,5 +35,13 @@ class NumRangesController < ApplicationController
                                         :minimum,
                                         :maximum,
                                         :required)
+    end
+
+    def store_referer
+      session[:referer] = request.referer
+    end
+
+    def referer
+      session.delete(:referer)
     end
 end
