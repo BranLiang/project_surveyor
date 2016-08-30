@@ -1,0 +1,23 @@
+<div class="exis_questions">
+
+  <hr>
+
+  <h3><strong>Existing Questions:</strong></h3>
+  <% if survey.has_no_questions_with_text? %>
+    <h4>There are no questions yet. Mother fucker.</h4>
+  <% else %>
+  <ol>
+    <% survey.all_questions_with_text.each do |question| %>
+      <li>
+        <h4><strong><%= question.text.capitalize %></strong></h4>
+        <h5><%= "#{question.require_status}. #{question.multi_select_status}" %></h5>
+        <ol>
+          <% question.response_options.each do |response_option| %>
+            <li><%= response_option.text %></li>
+          <% end %>
+        </ol>
+      </li>
+    <% end %>
+  </ol>
+  <% end %>
+</div>

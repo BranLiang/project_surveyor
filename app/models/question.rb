@@ -18,4 +18,20 @@ class Question < ApplicationRecord
       ["Number Range(Not functioning yet)", "num_range"]
     ]
   end
+
+  def has_text?
+    self.text ? true : false
+  end
+
+  def has_no_text?
+    self.text ? false : true
+  end
+
+  def require_status
+    self.required ? "Required" : "Not required"
+  end
+
+  def multi_select_status
+    self.multi_select ? "Multiple select" : "Select one"
+  end
 end
