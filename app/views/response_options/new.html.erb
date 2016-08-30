@@ -2,17 +2,19 @@
   <%= render 'shared/question_header', survey: @survey %>
 
   <div class="text-center">
-    <h2><strong>Add a Multiple Choice Question:</strong></h2>
-    <h3><span class="text-muted">1.Select Options</span> | <strong>2.Add Question Text</strong></h3>
+    <h3><strong>Add a Multiple Choice Question:</strong></h3>
+    <h4><span class="text-muted">1.Select Options</span> | <strong>2.Add Question Text</strong></h4>
   </div>
 
+  <hr>
+
   <%= form_for @question do |f| %>
-    <h4><strong>What is your question?</strong></h4>
+    <h4><strong><i class="fa fa-pencil-square-o" aria-hidden="true"></i> What is your question?</strong></h4>
     <%= f.text_field :text, class: "form-control input-lg" %>
 
     <% @question.options.times do |i| %>
       <div class="form-group">
-        <h4><strong>Option <%= i + 1 %>:</strong></h4>
+        <h4><strong><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Option <%= i + 1 %>:</strong></h4>
         <%= f.fields_for :response_options do |response_option| %>
           <%= response_option.text_field :text, class: "form-control input-lg" %>
         <% end %>
