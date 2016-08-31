@@ -32,9 +32,9 @@ class NumRangesController < ApplicationController
     def white_list_params
       params.require(:num_range).permit(:survey_id,
                                         :text,
+                                        :required,
                                         :minimum,
-                                        :maximum,
-                                        :required)
+                                        :maximum)
     end
 
     def store_referer

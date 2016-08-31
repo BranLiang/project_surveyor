@@ -57,10 +57,10 @@ ActiveRecord::Schema.define(version: 20160831051456) do
   end
 
   create_table "respondents", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "survey_id",  null: false
+    t.string   "name",       default: "anonymous", null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "survey_id",                        null: false
     t.index ["survey_id"], name: "index_respondents_on_survey_id", using: :btree
   end
 

@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
 
   def edit
     @question = Question.find_by_id(params[:id])
-    @survey = survey_includes.find_by_id(@question.survey_id)
+    @survey = Survey.includes(:questions, :num_ranges).find_by_id(@question.survey_id)
   end
 
   def update

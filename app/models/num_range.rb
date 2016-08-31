@@ -3,7 +3,7 @@ class NumRange < ApplicationRecord
 
   validates_numericality_of :maximum, greater_than: :minimum
   validates_numericality_of :minimum, less_than: :maximum
-  validates :text, :required, presence: true
+  validates :text, presence: true
 
   def require_status
     self.required ? "Required" : "Not required"
