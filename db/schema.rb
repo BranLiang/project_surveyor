@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20160830142913) do
     t.index ["survey_id"], name: "index_questions_on_survey_id", using: :btree
   end
 
+
   create_table "respondents", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false

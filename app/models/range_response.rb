@@ -1,0 +1,2 @@
+class RangeResponse < ApplicationRecord
+end

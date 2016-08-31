@@ -1,0 +1,2 @@
+class MultiResponse < ApplicationRecord
+end
