@@ -3,7 +3,7 @@ class CreateRangeResponses < ActiveRecord::Migration[5.0]
     create_table :range_responses do |t|
       t.integer :num_range_id,  null: false
       t.integer :respondent_id, null: false
-      t.integer :anwser
+      t.integer :answer
 
       t.timestamps
     end

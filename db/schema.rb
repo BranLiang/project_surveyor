@@ -16,12 +16,14 @@ ActiveRecord::Schema.define(version: 20160831012824) do
   enable_extension "plpgsql"
 
   create_table "multi_responses", force: :cascade do |t|
-    t.integer  "respondent_id", null: false
-    t.integer  "question_id",   null: false
-    t.string   "answer",        null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["respondent_id", "question_id"], name: "index_multi_responses_on_respondent_id_and_question_id", using: :btree
+    t.integer  "respondent_id",      null: false
+    t.integer  "question_id",        null: false
+    t.integer  "response_option_id", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["question_id"], name: "index_multi_responses_on_question_id", using: :btree
+    t.index ["respondent_id"], name: "index_multi_responses_on_respondent_id", using: :btree
+    t.index ["response_option_id"], name: "index_multi_responses_on_response_option_id", using: :btree
   end
 
   create_table "num_ranges", force: :cascade do |t|
@@ -49,7 +51,7 @@ ActiveRecord::Schema.define(version: 20160831012824) do
   create_table "range_responses", force: :cascade do |t|
     t.integer  "num_range_id",  null: false
     t.integer  "respondent_id", null: false
-    t.integer  "anwser"
+    t.integer  "answer"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["num_range_id", "respondent_id"], name: "index_range_responses_on_num_range_id_and_respondent_id", using: :btree
