@@ -9,8 +9,6 @@ class Question < ApplicationRecord
   validates :text, length: { within: 1..200 },
                    allow_nil: true
 
-  validates :options, length: { within: 1..10 }
-
   def self.question_types
     [
       ["Multiple Choice", "multi"],

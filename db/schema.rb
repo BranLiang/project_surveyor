@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831042458) do
+ActiveRecord::Schema.define(version: 20160831051456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20160831042458) do
   create_table "multi_responses", force: :cascade do |t|
     t.integer  "respondent_id", null: false
     t.integer  "question_id",   null: false
+    t.string   "answer"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["question_id"], name: "index_multi_responses_on_question_id", using: :btree
@@ -67,6 +68,8 @@ ActiveRecord::Schema.define(version: 20160831042458) do
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "survey_id",  null: false
+    t.index ["survey_id"], name: "index_respondents_on_survey_id", using: :btree
   end
 
   create_table "response_options", force: :cascade do |t|

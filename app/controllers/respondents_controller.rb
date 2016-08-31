@@ -7,6 +7,26 @@ class RespondentsController < ApplicationController
   end
 
   def create
-    fail
+    @survey = Survey.includes(:questions => :response_options).find_by_id(params[:respondent][:survey_id])
+    @respondent = Respondent.new(white_list_params)
+    if @respondent.save
+      flash[:success] = ["Thanks for your participation! Cheers!"]
+      redirect_to root_path
+    else
+      flash.now[:danger] = @respondent.errors.full_messages
+      render :new
+    end
   end
+
+  private
+    def white_list_params
+      params.require(:respondent).permit(:name,
+                                        :survey_id,
+                                       {
+                                         :multi_responses_attributes => [
+                                           :question_id,
+                                           :answer
+                                         ]
+                                         })
+    end
 end
