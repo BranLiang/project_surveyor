@@ -1,7 +1,6 @@
 class Respondent < ApplicationRecord
-  serialize :answer
-  has_many :multi_responses
-  has_many :range_responses
+  has_many :multi_responses, dependent: :destroy
+  has_many :range_responses, dependent: :destroy
   belongs_to :survey
 
   accepts_nested_attributes_for :range_responses,

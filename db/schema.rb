@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831051456) do
+ActiveRecord::Schema.define(version: 20160831065333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20160831051456) do
   create_table "multi_responses", force: :cascade do |t|
     t.integer  "respondent_id", null: false
     t.integer  "question_id",   null: false
-    t.string   "answer"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["question_id"], name: "index_multi_responses_on_question_id", using: :btree

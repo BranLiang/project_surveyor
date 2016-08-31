@@ -1,0 +1,2 @@
+class JoinOption < ApplicationRecord
+end

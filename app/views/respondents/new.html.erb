@@ -30,13 +30,13 @@
                 <% if multi_question.multi_select? %>
                   <%= f.fields_for :multi_responses do |multi_response| %>
                     <%= multi_response.hidden_field :question_id, value: multi_question.id %>
-                    <%= multi_response.collection_check_boxes :answer, multi_question.response_options, :id, :text, {}, class: "checkbox" %>
+                    <%= multi_response.collection_check_boxes :response_option_ids, multi_question.response_options, :id, :text, {}, class: "checkbox" %>
                   <% end %>
                 <!-- Single selection questions -->
                 <% else %>
                   <%= f.fields_for :multi_responses do |multi_response| %>
                     <%= multi_response.hidden_field :question_id, value: multi_question.id %>
-                    <%= multi_response.collection_radio_buttons :answer, multi_question.response_options, :id, :text, {}, class: "radio radio-inline" %>
+                    <%= multi_response.collection_radio_buttons :response_option_id, multi_question.response_options, :id, :text, {}, class: "radio radio-inline" %>
                   <% end %>
                 <% end %>
               </li>
