@@ -15,22 +15,25 @@
   <main>
     <%= form_for @respondent do |f| %>
       <div class="form-group text-center">
-        <h4><strong>#TellMeYouName!</strong></h4>
+        <h3><strong>#TellMeYouName!</strong></h3>
         <%= f.text_field :name, class: "form-control input-lg text-center" %>
       </div>
       <ol>
+        <!-- list all multi_questions for the survey -->
         <% if @survey.has_multi_questions? %>
           <% @survey.all_multi_questions_with_text.each do |multi_question| %>
             <div class="question-block">
               <li>
                 <h4><strong><%= " * " if multi_question.required? %><%= multi_question.text.capitalize %></strong></h4>
+                <!-- Multiple selection questions -->
                 <% if multi_question.multi_select? %>
-                  <%= fields_for :multi_responses do |multi_response| %>
+                  <%= f.fields_for :multi_responses do |multi_response| %>
                     <%= multi_response.hidden_field :question_id, value: multi_question.id %>
-                    <%= multi_response.collection_check_boxes :response_option_ids, multi_question.response_options, :id, :text, {}, class: "checkbox" %>
+                    <%= multi_response.collection_check_boxes :response_option_id, multi_question.response_options, :id, :text, {}, class: "checkbox" %>
                   <% end %>
+                <!-- Single selection questions -->
                 <% else %>
-                  <%= fields_for :multi_responses do |multi_response| %>
+                  <%= f.fields_for :multi_responses do |multi_response| %>
                     <%= multi_response.hidden_field :question_id, value: multi_question.id %>
                     <%= multi_response.collection_radio_buttons :response_option_id, multi_question.response_options, :id, :text, {}, class: "radio radio-inline" %>
                   <% end %>
@@ -38,7 +41,12 @@
               </li>
             </div>
           <% end %>
-        <% end %>
+
+          <div class="form-group">
+            <hr>
+            <%= f.submit "Submit your Survey", class: "btn btn-primary btn-lg btn-block" %>
+          </div>
+        <% end %> <!-- end of the multi_questions -->
       </ol>
 
     <% end %>

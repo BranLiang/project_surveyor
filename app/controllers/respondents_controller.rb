@@ -5,4 +5,8 @@ class RespondentsController < ApplicationController
     @respondent.multi_responses.build
     @respondent.range_responses.build
   end
+
+  def create
+    fail
+  end
 end
