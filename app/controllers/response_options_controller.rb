@@ -6,4 +6,5 @@ class ResponseOptionsController < ApplicationController
     survey = Survey.includes(:questions => :response_options)
     @survey = survey.find_by_id(@question.survey_id)
   end
+
 end
