@@ -6,26 +6,30 @@
   <ol>
     <% if survey.has_multi_questions? %>
       <% survey.all_multi_questions_with_text.each do |question| %>
-        <li>
-          <h4><strong><%= question.text.capitalize %></strong></h4>
-          <span class="text-muted"><%= "#{question.require_status}. #{question.multi_select_status}" %></span>
-          <ol type="A">
-            <% question.response_options.each do |response_option| %>
+        <div class="question-block">
+          <li>
+            <h4><strong><%= question.text.capitalize %></strong></h4>
+            <span class="text-muted"><%= "#{question.require_status}. #{question.multi_select_status}" %></span>
+            <ol type="A">
+              <% question.response_options.each do |response_option| %>
               <li><%= response_option.text %></li>
-            <% end %>
-          </ol>
-          <%= link_to "Delete Question", question_path(question), method: "delete", data: { confirm: "Are you sure?" } %>
-        </li>
+              <% end %>
+            </ol>
+            <%= link_to "Delete Question", question_path(question), method: "delete", data: { confirm: "Are you sure?" } %>
+          </li>
+        </div>
       <% end %>
     <% end %>
     <% if survey.has_num_ranges? %>
       <% survey.all_num_questions.each do |question| %>
-        <li>
-          <h4><strong><%= question.text.capitalize %></strong></h4>
-          <span class="text-muted"><%= "#{question.require_status}. Min: #{question.minimum}, Max: #{question.maximum}" %></span>
-          <br />
-          <%= link_to "Delete Question", num_range_path(question), method: "delete", data: { confirm: "Are you sure?" } %>
-        </li>
+        <div class="question-block">
+          <li>
+            <h4><strong><%= question.text.capitalize %></strong></h4>
+            <span class="text-muted"><%= "#{question.require_status}. Min: #{question.minimum}, Max: #{question.maximum}" %></span>
+            <br />
+            <%= link_to "Delete Question", num_range_path(question), method: "delete", data: { confirm: "Are you sure?" } %>
+          </li>
+        </div>
       <% end %>
     <% end %>
     <% if survey.has_no_questions? %>

@@ -8,4 +8,9 @@ class NumRange < ApplicationRecord
   def require_status
     self.required ? "Required" : "Not required"
   end
+
+  def required?
+    self.required
+  end
+
 end

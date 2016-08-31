@@ -1,0 +1,41 @@
+<div class="new-response">
+  <div class="text-center">
+    <h1><strong>Survey Taker:</strong></h1>
+
+    <hr>
+    <h3><strong><%= @survey.title %></strong></h3>
+    <h4><%= @survey.description %></h4>
+    <hr>
+
+    <p>
+      <span class="text-muted">Questions marked with an asterisk(*) are required</span>
+    </p>
+  </div>
+
+  <main>
+    <%= form_for @respondent do |f| %>
+      <div class="form-group text-center">
+        <h4><strong>#TellMeYouName!</strong></h4>
+        <%= f.text_field :name, class: "form-control input-lg text-center" %>
+      </div>
+      <ol>
+        <% if @survey.has_multi_questions? %>
+          <% @survey.all_multi_questions_with_text.each do |multi_question| %>
+            <div class="question-block">
+              <li>
+                <h4><strong><%= " * " if multi_question.required? %><%= multi_question.text.capitalize %></strong></h4>
+                <% if multi_question.multi_select? %>
+                  <%= fields_for :multi_responses do |multi_response| %>
+                    <%= multi_response.hidden_field :question_id, value: multi_question.id %>
+                    <%= multi_response.collection_check_boxes :answer, multi_question.response_options, :id, :text, {}, class: "checkbox" %>
+                  <% end %>
+                <% end %>
+              </li>
+            </div>
+          <% end %>
+        <% end %>
+      </ol>
+
+    <% end %>
+  </main>
+</div>

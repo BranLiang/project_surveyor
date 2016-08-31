@@ -18,6 +18,14 @@ class Question < ApplicationRecord
     ]
   end
 
+  def required?
+    self.required
+  end
+
+  def multi_select?
+    self.multi_select
+  end
+
   def has_no_options?
     self.response_options.empty?
   end
