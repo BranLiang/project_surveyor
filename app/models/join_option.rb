@@ -1,2 +1,0 @@
-class JoinOption < ApplicationRecord
-end

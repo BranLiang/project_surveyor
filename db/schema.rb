@@ -10,22 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831065333) do
+ActiveRecord::Schema.define(version: 20160831051456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "join_options", force: :cascade do |t|
-    t.integer  "response_option_id"
-    t.integer  "multi_response_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.index ["response_option_id", "multi_response_id"], name: "index_join_options_on_response_option_id_and_multi_response_id", using: :btree
-  end
-
   create_table "multi_responses", force: :cascade do |t|
     t.integer  "respondent_id", null: false
     t.integer  "question_id",   null: false
+    t.text     "answer"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["question_id"], name: "index_multi_responses_on_question_id", using: :btree
