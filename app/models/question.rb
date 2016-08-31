@@ -1,6 +1,7 @@
 class Question < ApplicationRecord
   belongs_to :survey
   has_many :response_options, dependent: :destroy
+  has_many :multi_responses, dependent: :destroy
 
   accepts_nested_attributes_for :response_options,
                                 :reject_if => :all_blank,
