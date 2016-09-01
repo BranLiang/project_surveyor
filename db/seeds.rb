@@ -12,6 +12,7 @@ Survey.destroy_all
 Question.destroy_all
 NumRange.destroy_all
 ResponseOption.destroy_all
+JoinOption.destroy_all
 
 puts "All old data destroyed."
 
@@ -30,7 +31,7 @@ def rand_boolean
 end
 
 def add_options m
-  rand(1..6).times do
+  rand(2..5).times do
     r = ResponseOption.new
     r[:text] = Faker::Lorem.sentence
     r[:question_id] = m.id
