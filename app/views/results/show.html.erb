@@ -19,15 +19,15 @@
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <td>Response</td>
-                  <td>Count</td>
+                  <td class="col-xs-10">Response</td>
+                  <td class="col-xs-2 text-center">Count</td>
                 </tr>
               </thead>
               <tbody>
                 <% question.response_options.each do |response_option| %>
                   <tr>
-                    <td><%= response_option.text %></td>
-                    <td><%= @survey.choose_num(response_option) %></td>
+                    <td class="col-xs-10"><%= response_option.text %></td>
+                    <td class="col-xs-2 text-center"><%= @survey.choose_num(response_option) %></td>
                   </tr>
                 <% end %>
               </tbody>
@@ -42,15 +42,15 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <td>Response</td>
-                  <td>Count</td>
+                  <td class="col-xs-10">Response</td>
+                  <td class="col-xs-2 text-center">Count</td>
                 </tr>
               </thead>
               <tbody>
                 <% @survey.all_range_values(question).each do |picked_value, num| %>
                   <tr>
-                    <td><%= picked_value %></td>
-                    <td><%= num %></td>
+                    <td class="col-xs-10"><%= picked_value %></td>
+                    <td class="col-xs-2 text-center"><%= num %></td>
                   </tr>
                 <% end %>
               </tbody>
