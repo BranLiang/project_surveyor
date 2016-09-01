@@ -71,8 +71,7 @@ puts "number range questions created."
 
 puts "creating respondent..."
 Survey.all.each do |s|
-  5.times do
-    s = Survey.first
+  rand(1..10).times do
     r = Respondent.new
     r[:name] = "Mother fucker"
     r[:survey_id] = s.id

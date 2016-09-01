@@ -1,1 +1,63 @@
-hello world
+<div class="show-result">
+  <div class="text-center">
+    <h1><strong>Survey Results:</strong></h1>
+    <hr>
+    <h3><strong><%= @survey.title %></strong></h3>
+    <h4><%= @survey.description %></h4>
+    <hr>
+  </div>
+
+  <main>
+    <p>
+      <%= "#{pluralize(@survey.respondents.count, 'Response')}" %>
+    </p>
+    <ol>
+      <% if @survey.has_multi_questions? %>
+        <% @survey.all_multi_questions_with_text.each do |question| %>
+          <li>
+            <h4><strong><%= question.text.capitalize %></strong></h4>
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <td>Response</td>
+                  <td>Count</td>
+                </tr>
+              </thead>
+              <tbody>
+                <% question.response_options.each do |response_option| %>
+                  <tr>
+                    <td><%= response_option.text %></td>
+                    <td><%= @survey.choose_num(response_option) %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </li>
+        <% end %>
+      <% end %>
+      <% if @survey.has_num_ranges? %>
+        <% @survey.all_num_questions.each do |question| %>
+          <li>
+            <h4><strong><%= question.text.capitalize %></strong></h4>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <td>Response</td>
+                  <td>Count</td>
+                </tr>
+              </thead>
+              <tbody>
+                <% @survey.all_range_values(question).each do |picked_value, num| %>
+                  <tr>
+                    <td><%= picked_value %></td>
+                    <td><%= num %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </li>
+        <% end %>
+      <% end %>
+    </ol>
+  </main>
+</div>

@@ -48,4 +48,26 @@ class Survey < ApplicationRecord
   def all_num_questions
     self.num_ranges
   end
+
+  def choose_num(option)
+    count = 0
+    if self.has_respondents?
+      self.respondents.each do |respondent|
+        count += 1 if respondent.choosed?(option)
+      end
+    end
+    count
+  end
+
+  def has_respondents?
+    self.respondents.empty? ? false : true
+  end
+
+  def all_range_values(num_range)
+    results = Hash.new{0}
+    self.respondents.each do |respondent|
+      results[respondent.number_picked(num_range)] += 1 if respondent.number_picked(num_range)
+    end
+    results
+  end
 end
