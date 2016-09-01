@@ -22,10 +22,11 @@ class RespondentsController < ApplicationController
     def white_list_params
       params.require(:respondent).permit(:name,
                                         :survey_id,
-                                       {
+                                        {
                                          :multi_responses_attributes => [
                                            :question_id,
-                                           :answer
+                                           :response_option_ids,
+                                           :response_option_ids => []
                                          ]
                                          })
     end

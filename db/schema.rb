@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20160831110415) do
   create_table "multi_responses", force: :cascade do |t|
     t.integer  "respondent_id", null: false
     t.integer  "question_id",   null: false
-    t.text     "answer"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["question_id"], name: "index_multi_responses_on_question_id", using: :btree
