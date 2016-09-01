@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   resources :choices,   only: [:index]
   resources :response_options, only: [:new, :create, :edit, :update]
   resources :respondents, only: [:index, :new, :create]
+  resources :results, only: [:show]
   get 'choose', to: 'choices#choose'
 end

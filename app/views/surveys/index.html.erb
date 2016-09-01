@@ -27,7 +27,7 @@
           <%= survey.description.capitalize %>
         </p>
         <%= link_to "Take Survey", new_respondent_path(:survey_id => survey.id), class: "btn btn-info" %>
-        <%= link_to "View Results", '#', class: "btn btn-info" %>
+        <%= link_to "View Results", result_path(survey), class: "btn btn-info" %>
         <%= link_to "Add Questions", choices_path(:survey_id => survey.id), class: "btn btn-info" %>
       </li>
 
