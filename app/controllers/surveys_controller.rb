@@ -1,6 +1,6 @@
 class SurveysController < ApplicationController
   def index
-    @surveys = Survey.all
+    @surveys = Survey.all.order(:id).reverse_order
   end
 
   def new

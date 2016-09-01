@@ -5,6 +5,8 @@ class ResultsController < ApplicationController
 
   private
     def survey_includes
-      Survey.includes(:questions => :response_options, :respondents => :multi_responses)
+      Survey.includes(:questions => :response_options,
+                      :respondents => [:multi_responses, :range_responses]
+                      )
     end
 end
