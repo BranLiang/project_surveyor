@@ -67,6 +67,46 @@ puts "creating number range questions..."
 end
 puts "number range questions created."
 
+
+
+puts "creating respondent..."
+Survey.all.each do |s|
+  5.times do
+    s = Survey.first
+    r = Respondent.new
+    r[:name] = "Mother fucker"
+    r[:survey_id] = s.id
+    r.save!
+
+    if s.has_multi_questions?
+      s.all_multi_questions_with_text.each do |question|
+        options = question.response_options.pluck(:id).shuffle
+        mr = MultiResponse.new
+        mr[:respondent_id] = r.id
+        mr[:question_id] = question.id
+        if question.multi_select?
+          mr.response_option_ids=[options.pop, options.pop]
+        else
+          mr.response_option_ids=[options.pop]
+        end
+        mr.save!
+      end
+    end
+
+    if s.has_num_ranges?
+      s.all_num_questions.each do |question|
+        rr = RangeResponse.new
+        rr[:respondent_id] = r.id
+        rr[:num_range_id] = question.id
+        rr[:answer] = rand(question.input_range)
+        rr.save!
+      end
+    end
+
+  end
+end
+
+
 # Create one survey without questions
 s = Survey.new
 s[:title] = Faker::Lorem.sentence
