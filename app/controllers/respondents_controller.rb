@@ -20,13 +20,18 @@ class RespondentsController < ApplicationController
 
   private
     def white_list_params
-      params.require(:respondent).permit(:name,
+      params.require(:respondent).permit(
+                                        :name,
                                         :survey_id,
                                         {
                                          :multi_responses_attributes => [
                                            :question_id,
                                            :response_option_ids,
                                            :response_option_ids => []
+                                         ],
+                                         :range_responses_attributes => [
+                                           :num_range_id,
+                                           :answer
                                          ]
                                          })
     end

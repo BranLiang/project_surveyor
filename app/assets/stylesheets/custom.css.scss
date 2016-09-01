@@ -49,3 +49,13 @@ p {
 .field_with_errors {
   border: 1px solid red;
 }
+
+.new-response {
+  .range {
+    display: inline-flex;
+    width: 100%;
+    input[type="range"] {
+      display: inline;
+    }
+  }
+}

@@ -26,21 +26,36 @@
             <div class="question-block">
               <li>
                 <h4><strong><%= " * " if multi_question.required? %><%= multi_question.text.capitalize %></strong></h4>
-                <!-- Multiple selection questions -->
-                <% if multi_question.multi_select? %>
-                  <%= f.fields_for :multi_responses do |multi_response| %>
-                    <%= multi_response.hidden_field :question_id, value: multi_question.id %>
+                <%= f.fields_for :multi_responses do |multi_response| %>
+                  <%= multi_response.hidden_field :question_id, value: multi_question.id %>
+                  <% if multi_question.multi_select? %>
+                    <!-- Multiple selection questions -->
                     <%= multi_response.collection_check_boxes :response_option_ids, multi_question.response_options, :id, :text, {}, class: "checkbox" %>
-                  <% end %>
-                <!-- Single selection questions -->
-                <% else %>
-                  <%= f.fields_for :multi_responses do |multi_response| %>
-                    <%= multi_response.hidden_field :question_id, value: multi_question.id %>
+                  <% else %>
+                    <!-- Single selection questions -->
                     <%= multi_response.collection_radio_buttons :response_option_ids, multi_question.response_options, :id, :text, {}, class: "radio radio-inline" %>
                   <% end %>
                 <% end %>
               </li>
             </div>
+          <% end %>
+          <!-- list all the num_range probelem -->
+          <% if @survey.has_num_ranges? %>
+            <% @survey.all_num_questions.each do |num_question| %>
+              <div class="question-block">
+                <li>
+                  <h4><strong><%= " * " if num_question.required? %><%= num_question.text.capitalize %></strong></h4>
+                  <%= f.fields_for :range_responses do |range_response| %>
+                    <%= range_response.hidden_field :num_range_id, value: num_question.id %>
+                    <div class="range">
+                      <%= num_question.minimum %>
+                      <%= range_response.range_field :answer, {:in => num_question.input_range, :step => 1} %>
+                      <%= num_question.maximum %>
+                    </div>
+                  <% end %>
+                </li>
+              </div>
+            <% end %>
           <% end %>
 
         <% end %> <!-- end of the multi_questions -->

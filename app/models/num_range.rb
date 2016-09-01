@@ -13,4 +13,10 @@ class NumRange < ApplicationRecord
     self.required
   end
 
+  def input_range
+    min = self.minimum
+    max = self.maximum
+    (min..max)
+  end
+
 end

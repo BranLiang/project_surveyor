@@ -62,7 +62,7 @@ puts "creating number range questions..."
   n[:minimum] = rand(1..5)
   n[:maximum] = rand(6..10)
   n[:survey_id] = Survey.pluck(:id).sample
-  n[:required] = true
+  n[:required] = rand_boolean
   n.save!
 end
 puts "number range questions created."
