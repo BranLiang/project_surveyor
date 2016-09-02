@@ -24,6 +24,9 @@
         <i class="fa-li fa fa-flag"></i>
         <h3><strong><%= survey.title.capitalize %></strong></h3>
         <p>
+          <small><span class="text-muted"><%= "Created at:  #{survey.created_at}" %></span></small>
+        </p>
+        <p>
           <%= survey.description.capitalize %>
         </p>
         <%= link_to "Take Survey", new_respondent_path(:survey_id => survey.id), class: "btn btn-info" %>
