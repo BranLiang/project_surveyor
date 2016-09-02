@@ -24,7 +24,7 @@
         <i class="fa-li fa fa-flag"></i>
         <h3><strong><%= survey.title.capitalize %></strong></h3>
         <p>
-          <small><span class="text-muted"><%= "Created at:  #{survey.created_at}" %></span></small>
+          <small><span class="text-muted"><%= "Created at:  #{survey.created_at.in_time_zone('Asia/Shanghai')}" %></span></small>
         </p>
         <p>
           <%= survey.description.capitalize %>
