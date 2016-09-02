@@ -25,11 +25,13 @@ class RespondentsController < ApplicationController
                                         :survey_id,
                                         {
                                          :multi_responses_attributes => [
+                                           :id,
                                            :question_id,
                                            :response_option_ids,
                                            :response_option_ids => []
                                          ],
                                          :range_responses_attributes => [
+                                           :id,
                                            :num_range_id,
                                            :answer
                                          ]
