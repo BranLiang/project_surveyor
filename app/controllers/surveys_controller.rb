@@ -18,6 +18,17 @@ class SurveysController < ApplicationController
     end
   end
 
+  def destroy
+    survey = Survey.find_by_id(params[:id])
+    if survey && survey.destroy
+      flash[:success] = ["Survey has been deleted"]
+      redirect_to root_path
+    else
+      flash[:danger] = survey.errors.full_messages
+      redirect_to root_path
+    end
+  end
+
   private
     def whilt_list_params
       params.require(:survey).permit(:title, :description)

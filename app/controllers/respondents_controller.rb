@@ -14,6 +14,9 @@ class RespondentsController < ApplicationController
       redirect_to root_path
     else
       flash.now[:danger] = @respondent.errors.full_messages
+      @respondent = Respondent.new
+      @respondent.multi_responses.build
+      @respondent.range_responses.build
       render :new
     end
   end
@@ -25,13 +28,11 @@ class RespondentsController < ApplicationController
                                         :survey_id,
                                         {
                                          :multi_responses_attributes => [
-                                           :id,
                                            :question_id,
                                            :response_option_ids,
                                            :response_option_ids => []
                                          ],
                                          :range_responses_attributes => [
-                                           :id,
                                            :num_range_id,
                                            :answer
                                          ]
